@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#000000">
+
+<title>Achille Lauro — Firma</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    overflow: hidden;
+}
+
+body {
+    position: fixed;
+    inset: 0;
+}
+
+.screen {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* ---------------- HOME ---------------- */
+
+#home {
+    align-items: stretch;
+    justify-content: flex-end;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.12) 0%,
+            rgba(0,0,0,.25) 42%,
+            rgba(0,0,0,.82) 73%,
+            #000 100%
+        ),
+        url("lauro.jpg");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.home-content {
+    width: 47%;
+    min-width: 470px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 7vw 7vw 7vw 4vw;
+
+    z-index: 2;
+}
+
+.logo {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 900;
+    font-size: clamp(58px, 7vw, 105px);
+    line-height: .78;
+    letter-spacing: -6px;
+    margin: 0 0 36px 0;
+}
+
+.logo span {
+    display: block;
+}
+
+.event {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: .8;
+    margin-bottom: 14px;
+}
+
+.location {
+    font-size: 20px;
+    font-weight: 400;
+    opacity: .75;
+    margin-bottom: 60px;
+}
+
+.main-button {
+    width: 100%;
+    height: 82px;
+
+    border: 0;
+    border-radius: 8px;
+
+    background: #fff;
+    color: #000;
+
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+}
+
+.main-button:active {
+    transform: scale(.99);
+}
+
+/* ---------------- FORM ---------------- */
+
+#formScreen {
+    background: #050505;
+    flex-direction: column;
+    padding:
+        max(45px, env(safe-area-inset-top))
+        max(60px, env(safe-area-inset-right))
+        max(40px, env(safe-area-inset-bottom))
+        max(60px, env(safe-area-inset-left));
+}
+
+.topbar {
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #282828;
+}
+
+.small-logo {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+.back {
+    background: transparent;
+    color: #888;
+    border: 0;
+    font-size: 15px;
+    letter-spacing: 2px;
+}
+
+.form-wrapper {
+    flex: 1;
+
+    width: min(100%, 1050px);
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title {
+    font-size: clamp(46px, 5vw, 72px);
+    margin: 0 0 10px 0;
+    letter-spacing: -3px;
+}
+
+.subtitle {
+    color: #777;
+    font-size: 18px;
+    margin-bottom: 48px;
+}
+
+.names {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 32px;
+}
+
+.field label {
+    display: block;
+    color: #777;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.field input {
+    width: 100%;
+    height: 68px;
+
+    border: 1px solid #333;
+    border-radius: 5px;
+
+    background: #111;
+    color: #fff;
+
+    padding: 0 20px;
+
+    font-size: 22px;
+    outline: none;
+}
+
+.field input:focus {
+    border-color: #777;
+}
+
+/* ---------------- SIGNATURE ---------------- */
+
+.signature-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #777;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    margin-bottom: 10px;
+}
+
+.clear {
+    background: none;
+    border: 0;
+    color: #777;
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    padding: 10px;
+}
+
+.canvas-wrapper {
+    width: 100%;
+    height: 280px;
+
+    border: 1px solid #333;
+    border-radius: 5px;
+
+    background: #000;
+
+    position: relative;
+    overflow: hidden;
+
+    margin-bottom: 30px;
+}
+
+canvas {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    touch-action: none;
+}
+
+.sign-here {
+    pointer-events: none;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    color: #292929;
+    font-size: 18px;
+    letter-spacing: 3px;
+}
+
+/* ---------------- SAVE ---------------- */
+
+.save {
+    height: 76px;
+
+    border: 0;
+    border-radius: 5px;
+
+    background: #fff;
+    color: #000;
+
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+/* ---------------- SUCCESS ---------------- */
+
+#success {
+    background: #000;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.success-check {
+    width: 85px;
+    height: 85px;
+
+    border: 2px solid #fff;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 38px;
+
+    margin-bottom: 35px;
+}
+
+#success h2 {
+    font-size: 50px;
+    margin: 0 0 12px;
+}
+
+#success p {
+    color: #777;
+    font-size: 18px;
+}
+
+/* ---------------- IPAD PORTRAIT ---------------- */
+
+@media (orientation: portrait) {
+
+    #home {
+        background-position: 35% center;
+    }
+
+    #home::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        background: linear-gradient(
+            0deg,
+            #000 0%,
+            rgba(0,0,0,.9) 28%,
+            rgba(0,0,0,.15) 65%
+        );
+    }
+
+    .home-content {
+        width: 100%;
+        min-width: 0;
+
+        justify-content: flex-end;
+
+        padding: 60px;
+        padding-bottom: 90px;
+    }
+
+    .logo {
+        font-size: 80px;
+    }
+
+    .names {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HOME -->
+
+<section id="home" class="screen active">
+
+    <div class="home-content">
+
+        <div class="event">
+            Fan Gathering
+        </div>
+
+        <div class="logo">
+            <span>ACHILLE</span>
+            <span>LAURO</span>
+        </div>
+
+        <div class="location">
+            Allianz Cloud · Milano
+        </div>
+
+        <button class="main-button" onclick="openForm()">
+            FIRMA →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- FORM -->
+
+<section id="formScreen" class="screen">
+
+    <div class="topbar">
+
+        <button class="back" onclick="goHome()">
+            ← INDIETRO
+        </button>
+
+        <div class="small-logo">
+            ACHILLE LAURO
+        </div>
+
+    </div>
+
+
+    <div class="form-wrapper">
+
+        <h1 class="title">
+            Lascia la tua firma
+        </h1>
+
+        <div class="subtitle">
+            Inserisci il tuo nome e firma nello spazio sottostante.
+        </div>
+
+
+        <div class="names">
+
+            <div class="field">
+                <label>NOME</label>
+                <input
+                    id="nome"
+                    type="text"
+                    autocomplete="off"
+                    placeholder="Nome">
+            </div>
+
+            <div class="field">
+                <label>COGNOME</label>
+                <input
+                    id="cognome"
+                    type="text"
+                    autocomplete="off"
+                    placeholder="Cognome">
+            </div>
+
+        </div>
+
+
+        <div class="signature-label">
+
+            <span>FIRMA</span>
+
+            <button class="clear" onclick="clearSignature()">
+                CANCELLA
+            </button>
+
+        </div>
+
+
+        <div class="canvas-wrapper">
+
+            <div id="signHint" class="sign-here">
+                FIRMA QUI
+            </div>
+
+            <canvas id="signature"></canvas>
+
+        </div>
+
+
+        <button class="save" onclick="saveSignature()">
+            SALVA FIRMA →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- SUCCESS -->
+
+<section id="success" class="screen">
+
+    <div class="success-check">
+        ✓
+    </div>
+
+    <h2>Firma salvata</h2>
+
+    <p>Grazie.</p>
+
+</section>
+
+
+<script>
+
+const home = document.getElementById("home");
+const formScreen = document.getElementById("formScreen");
+const success = document.getElementById("success");
+
+const canvas = document.getElementById("signature");
+const ctx = canvas.getContext("2d");
+
+const hint = document.getElementById("signHint");
+
+let drawing = false;
+let hasSignature = false;
+
+
+/* ---------------- NAVIGATION ---------------- */
+
+function showScreen(screen) {
+
+    document.querySelectorAll(".screen")
+        .forEach(s => s.classList.remove("active"));
+
+    screen.classList.add("active");
+
+}
+
+
+function openForm() {
+
+    showScreen(formScreen);
+
+    setTimeout(resizeCanvas, 50);
+
+}
+
+
+function goHome() {
+
+    resetForm();
+
+    showScreen(home);
+
+}
+
+
+/* ---------------- CANVAS ---------------- */
+
+function resizeCanvas() {
+
+    const rect = canvas.getBoundingClientRect();
+
+    const ratio = window.devicePixelRatio || 1;
+
+    canvas.width = rect.width * ratio;
+    canvas.height = rect.height * ratio;
+
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+    ctx.lineWidth = 3;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+
+    /* FIRMA BIANCA */
+
+    ctx.strokeStyle = "#ffffff";
+
+}
+
+
+function position(event) {
+
+    const rect = canvas.getBoundingClientRect();
+
+    return {
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top
+    };
+
+}
+
+
+canvas.addEventListener("pointerdown", event => {
+
+    event.preventDefault();
+
+    drawing = true;
+    hasSignature = true;
+
+    hint.style.display = "none";
+
+    const p = position(event);
+
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y);
+
+});
+
+
+canvas.addEventListener("pointermove", event => {
+
+    if (!drawing) return;
+
+    event.preventDefault();
+
+    const p = position(event);
+
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+
+});
+
+
+canvas.addEventListener("pointerup", () => {
+
+    drawing = false;
+
+});
+
+
+canvas.addEventListener("pointercancel", () => {
+
+    drawing = false;
+
+});
+
+
+function clearSignature() {
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    hasSignature = false;
+
+    hint.style.display = "block";
+
+}
+
+
+/* ---------------- SAVE ---------------- */
+
+function saveSignature() {
+
+    const nome =
+        document.getElementById("nome")
+        .value.trim();
+
+    const cognome =
+        document.getElementById("cognome")
+        .value.trim();
+
+
+    if (!nome || !cognome) {
+
+        alert("Inserisci nome e cognome.");
+
+        return;
+
+    }
+
+
+    if (!hasSignature) {
+
+        alert("Inserisci la firma.");
+
+        return;
+
+    }
+
+
+    /*
+       Per ora salviamo localmente sull'iPad.
+       Nella versione successiva possiamo
+       inviare tutto a database / Google Sheet.
+    */
+
+    const record = {
+
+        nome: nome,
+
+        cognome: cognome,
+
+        firma: canvas.toDataURL("image/png"),
+
+        data: new Date().toISOString()
+
+    };
+
+
+    let signatures =
+        JSON.parse(
+            localStorage.getItem("lauroSignatures")
+            || "[]"
+        );
+
+
+    signatures.push(record);
+
+
+    localStorage.setItem(
+        "lauroSignatures",
+        JSON.stringify(signatures)
+    );
+
+
+    showScreen(success);
+
+
+    /*
+       Dopo 2,5 secondi torna automaticamente
+       alla schermata iniziale per la guest successiva.
+    */
+
+    setTimeout(() => {
+
+        resetForm();
+
+        showScreen(home);
+
+    }, 2500);
+
+}
+
+
+/* ---------------- RESET ---------------- */
+
+function resetForm() {
+
+    document.getElementById("nome").value = "";
+    document.getElementById("cognome").value = "";
+
+    clearSignature();
+
+}
+
+
+/* ---------------- START ---------------- */
+
+window.addEventListener("resize", () => {
+
+    if (formScreen.classList.contains("active")) {
+
+        resizeCanvas();
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
