@@ -38,6 +38,10 @@ button, input {
     font: inherit;
 }
 
+button {
+    cursor: pointer;
+}
+
 .screen {
     position: fixed;
     inset: 0;
@@ -58,9 +62,11 @@ button, input {
     justify-content: center;
 
     background:
-        linear-gradient(
-            rgba(0,0,0,.08),
-            rgba(0,0,0,.18)
+        radial-gradient(
+            ellipse at center,
+            rgba(0,0,0,.02) 10%,
+            rgba(0,0,0,.18) 55%,
+            rgba(0,0,0,.8) 100%
         ),
         url("./lauro.jpg");
 
@@ -69,38 +75,18 @@ button, input {
     background-repeat: no-repeat;
 }
 
-#home::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    background:
-        radial-gradient(
-            ellipse at center,
-            rgba(0,0,0,0) 15%,
-            rgba(0,0,0,.10) 45%,
-            rgba(0,0,0,.72) 100%
-        );
-
-    pointer-events: none;
-}
-
 .homeContent {
-    position: relative;
-    z-index: 2;
-
-    width: min(720px, 62vw);
+    width: min(720px, 65vw);
     height: 100%;
 
     padding:
         max(35px, env(safe-area-inset-top))
-        30px
+        25px
         max(40px, env(safe-area-inset-bottom));
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
 
     text-align: center;
 }
@@ -108,23 +94,18 @@ button, input {
 .topEvent {
     margin-top: 1vh;
 
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
-
     letter-spacing: 7px;
 
-    text-transform: uppercase;
+    opacity: .78;
 
-    opacity: .75;
+    user-select: none;
 }
 
 .heroText {
     margin-top: auto;
     margin-bottom: 3vh;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .logo {
@@ -132,15 +113,14 @@ button, input {
 
     font-family: Georgia, "Times New Roman", serif;
 
-    font-size: clamp(54px, 6.5vw, 92px);
-
-    line-height: .80;
-
+    font-size: clamp(55px, 6.5vw, 92px);
     font-weight: 400;
+
+    line-height: .8;
 
     letter-spacing: -4px;
 
-    text-shadow: 0 3px 30px rgba(0,0,0,.9);
+    text-shadow: 0 3px 35px rgba(0,0,0,.95);
 }
 
 .logo span {
@@ -150,8 +130,7 @@ button, input {
 .location {
     margin-top: 25px;
 
-    font-size: 11px;
-
+    font-size: 10px;
     font-weight: 600;
 
     letter-spacing: 6px;
@@ -167,7 +146,7 @@ button, input {
 .sliderArea {
     width: min(480px, 70vw);
 
-    margin-bottom: 2vh;
+    margin-bottom: 1vh;
 }
 
 .slider {
@@ -176,14 +155,14 @@ button, input {
     width: 100%;
     height: 74px;
 
-    border: 1px solid rgba(255,255,255,.45);
+    border: 1px solid rgba(255,255,255,.42);
 
     border-radius: 100px;
 
-    background: rgba(0,0,0,.52);
+    background: rgba(0,0,0,.58);
 
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 
     overflow: hidden;
 
@@ -199,9 +178,9 @@ button, input {
     align-items: center;
     justify-content: center;
 
-    padding-left: 45px;
+    padding-left: 40px;
 
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
 
     letter-spacing: 5px;
@@ -209,8 +188,6 @@ button, input {
     color: rgba(255,255,255,.85);
 
     pointer-events: none;
-
-    transition: opacity .2s;
 }
 
 .sliderArrow {
@@ -231,22 +208,11 @@ button, input {
     align-items: center;
     justify-content: center;
 
-    font-size: 25px;
-    font-weight: 300;
+    font-size: 24px;
 
-    cursor: grab;
+    z-index: 5;
 
-    z-index: 3;
-
-    box-shadow: 0 3px 20px rgba(0,0,0,.35);
-
-    transform: translateX(0);
-
-    will-change: transform;
-}
-
-.sliderArrow:active {
-    cursor: grabbing;
+    touch-action: none;
 }
 
 .sliderProgress {
@@ -258,7 +224,7 @@ button, input {
 
     width: 0;
 
-    background: rgba(255,255,255,.10);
+    background: rgba(255,255,255,.11);
 
     pointer-events: none;
 }
@@ -274,9 +240,9 @@ button, input {
     flex-direction: column;
 
     padding:
-        max(22px, env(safe-area-inset-top))
+        max(20px, env(safe-area-inset-top))
         max(50px, env(safe-area-inset-right))
-        max(22px, env(safe-area-inset-bottom))
+        max(20px, env(safe-area-inset-bottom))
         max(50px, env(safe-area-inset-left));
 }
 
@@ -294,9 +260,9 @@ button, input {
     border: 0;
     background: transparent;
 
-    color: #666;
+    color: #777;
 
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
 
     letter-spacing: 2px;
@@ -308,8 +274,6 @@ button, input {
     font-family: Georgia, serif;
 
     font-size: 20px;
-
-    letter-spacing: -1px;
 }
 
 .formContent {
@@ -343,9 +307,9 @@ button, input {
 
     color: #666;
 
-    font-size: 14px;
+    font-size: 13px;
 
-    margin-bottom: 28px;
+    margin-bottom: 25px;
 }
 
 .names {
@@ -355,7 +319,7 @@ button, input {
 
     gap: 18px;
 
-    margin-bottom: 22px;
+    margin-bottom: 20px;
 }
 
 .field label,
@@ -376,20 +340,20 @@ button, input {
 
 .field input {
     width: 100%;
-    height: 55px;
+    height: 54px;
 
     background: #0d0d0d;
 
     border: 1px solid #292929;
     border-radius: 5px;
 
-    outline: none;
-
     color: #fff;
 
     padding: 0 18px;
 
     font-size: 18px;
+
+    outline: none;
 }
 
 .field input:focus {
@@ -398,8 +362,8 @@ button, input {
 
 .signatureHeader {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 
     margin-bottom: 8px;
 }
@@ -415,8 +379,6 @@ button, input {
     font-weight: 700;
 
     letter-spacing: 2px;
-
-    padding: 8px 0;
 }
 
 .signatureBox {
@@ -455,7 +417,7 @@ canvas {
 
     color: #242424;
 
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
 
     letter-spacing: 5px;
@@ -472,7 +434,7 @@ canvas {
     background: #fff;
     color: #000;
 
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 800;
 
     letter-spacing: 4px;
@@ -517,14 +479,200 @@ canvas {
     font-family: Georgia, serif;
 
     font-size: 45px;
-
     font-weight: 400;
 }
 
 #success p {
     color: #666;
 
-    font-size: 14px;
+    font-size: 11px;
+
+    letter-spacing: 4px;
+}
+
+
+/* ==================================================
+   ADMIN
+================================================== */
+
+#adminScreen {
+    background: #050505;
+
+    flex-direction: column;
+
+    padding:
+        max(20px, env(safe-area-inset-top))
+        50px
+        max(20px, env(safe-area-inset-bottom));
+}
+
+.adminTop {
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    flex-shrink: 0;
+
+    border-bottom: 1px solid #222;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 3px;
+}
+
+.adminButton {
+    border: 0;
+
+    background: transparent;
+
+    color: #999;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    padding: 15px 0;
+}
+
+.adminContent {
+    width: min(1100px, 92vw);
+
+    margin: 0 auto;
+
+    flex: 1;
+
+    overflow-y: auto;
+
+    -webkit-overflow-scrolling: touch;
+
+    padding: 30px 0 80px;
+}
+
+.adminHeader {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    margin-bottom: 30px;
+}
+
+.adminLabel {
+    color: #666;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 4px;
+}
+
+.adminCount {
+    font-family: Georgia, serif;
+
+    font-size: 70px;
+
+    line-height: 1;
+}
+
+.deleteAll {
+    border: 1px solid #333;
+
+    background: transparent;
+
+    color: #777;
+
+    border-radius: 100px;
+
+    padding: 12px 18px;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.signatureItem {
+    display: grid;
+
+    grid-template-columns:
+        minmax(180px, 1fr)
+        minmax(280px, 1.5fr)
+        100px;
+
+    gap: 25px;
+
+    align-items: center;
+
+    min-height: 115px;
+
+    padding: 18px 0;
+
+    border-top: 1px solid #222;
+}
+
+.guestName {
+    font-size: 19px;
+
+    margin-bottom: 7px;
+}
+
+.guestDate {
+    color: #555;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+}
+
+.signaturePreview {
+    width: 100%;
+    height: 80px;
+
+    object-fit: contain;
+    object-position: left center;
+
+    background: #000;
+
+    border: 1px solid #222;
+}
+
+.adminActions {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.adminAction {
+    border: 1px solid #333;
+
+    background: transparent;
+
+    color: #aaa;
+
+    padding: 9px;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+.emptyArchive {
+    padding: 70px 0;
+
+    border-top: 1px solid #222;
+
+    text-align: center;
+
+    color: #555;
+
+    font-size: 11px;
 
     letter-spacing: 3px;
 }
@@ -540,7 +688,7 @@ canvas {
     position: fixed;
     inset: 0;
 
-    z-index: 99999;
+    z-index: 999999;
 
     background: #000;
 
@@ -559,8 +707,7 @@ canvas {
 }
 
 #rotate span {
-    font-size: 13px;
-
+    font-size: 12px;
     font-weight: 700;
 
     letter-spacing: 5px;
@@ -576,6 +723,7 @@ canvas {
 
 </style>
 </head>
+
 
 <body>
 
@@ -595,20 +743,30 @@ canvas {
 
     <div class="homeContent">
 
-        <div class="topEvent">
+        <div
+            id="adminTrigger"
+            class="topEvent">
+
             FAN GATHERING
+
         </div>
 
 
         <div class="heroText">
 
             <h1 class="logo">
+
                 <span>ACHILLE</span>
+
                 <span>LAURO</span>
+
             </h1>
 
+
             <div class="location">
+
                 ALLIANZ CLOUD · MILANO
+
             </div>
 
         </div>
@@ -620,21 +778,28 @@ canvas {
                 id="slider"
                 class="slider">
 
+
                 <div
                     id="sliderProgress"
                     class="sliderProgress">
                 </div>
 
+
                 <div
                     id="sliderText"
                     class="sliderText">
+
                     SCORRI PER FIRMARE
+
                 </div>
+
 
                 <div
                     id="sliderArrow"
                     class="sliderArrow">
+
                     →
+
                 </div>
 
             </div>
@@ -646,22 +811,29 @@ canvas {
 </section>
 
 
-<!-- FIRMA -->
+
+<!-- FORM -->
 
 <section
     id="formScreen"
     class="screen">
+
 
     <div class="topbar">
 
         <button
             class="back"
             onclick="goHome()">
+
             ← INDIETRO
+
         </button>
 
+
         <div class="smallLogo">
+
             ACHILLE LAURO
+
         </div>
 
     </div>
@@ -670,15 +842,21 @@ canvas {
     <div class="formContent">
 
         <h1 class="formTitle">
+
             Lascia la tua firma
+
         </h1>
 
+
         <div class="description">
+
             Un segno di questo giorno.
+
         </div>
 
 
         <div class="names">
+
 
             <div class="field">
 
@@ -705,6 +883,7 @@ canvas {
 
             </div>
 
+
         </div>
 
 
@@ -715,7 +894,9 @@ canvas {
             <button
                 class="clear"
                 onclick="clearSignature()">
+
                 CANCELLA
+
             </button>
 
         </div>
@@ -726,7 +907,9 @@ canvas {
             <div
                 id="signatureHint"
                 class="signatureHint">
+
                 FIRMA QUI
+
             </div>
 
             <canvas id="signature"></canvas>
@@ -747,21 +930,118 @@ canvas {
 </section>
 
 
+
 <!-- SUCCESS -->
 
 <section
     id="success"
     class="screen">
 
+
     <div class="check">
+
         ✓
+
     </div>
 
-    <h2>Grazie.</h2>
 
-    <p>LA TUA FIRMA È STATA SALVATA</p>
+    <h2>
+
+        Grazie.
+
+    </h2>
+
+
+    <p>
+
+        LA TUA FIRMA È STATA SALVATA
+
+    </p>
 
 </section>
+
+
+
+<!-- ADMIN -->
+
+<section
+    id="adminScreen"
+    class="screen">
+
+
+    <div class="adminTop">
+
+        <button
+            class="adminButton"
+            onclick="closeAdmin()">
+
+            ← CHIUDI
+
+        </button>
+
+
+        <div>
+
+            ARCHIVIO FIRME
+
+        </div>
+
+
+        <button
+            class="adminButton"
+            onclick="exportCSV()">
+
+            ESPORTA CSV
+
+        </button>
+
+    </div>
+
+
+    <div class="adminContent">
+
+
+        <div class="adminHeader">
+
+
+            <div>
+
+                <div class="adminLabel">
+
+                    FIRME RACCOLTE
+
+                </div>
+
+
+                <div
+                    id="signatureCount"
+                    class="adminCount">
+
+                    0
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="deleteAll"
+                onclick="deleteAllSignatures()">
+
+                ELIMINA TUTTO
+
+            </button>
+
+        </div>
+
+
+        <div id="signatureList"></div>
+
+
+    </div>
+
+</section>
+
 
 
 <script>
@@ -771,31 +1051,41 @@ canvas {
 ================================================== */
 
 const home =
-    document.getElementById("home");
+document.getElementById("home");
 
 const formScreen =
-    document.getElementById("formScreen");
+document.getElementById("formScreen");
 
 const success =
-    document.getElementById("success");
+document.getElementById("success");
+
+const adminScreen =
+document.getElementById("adminScreen");
 
 
 function showScreen(screen) {
 
     document
-        .querySelectorAll(".screen")
-        .forEach(s =>
-            s.classList.remove("active")
-        );
+    .querySelectorAll(".screen")
+    .forEach(
+        s =>
+        s.classList.remove(
+            "active"
+        )
+    );
 
-    screen.classList.add("active");
+    screen.classList.add(
+        "active"
+    );
 
 }
 
 
 function openForm() {
 
-    showScreen(formScreen);
+    showScreen(
+        formScreen
+    );
 
     setTimeout(
         prepareCanvas,
@@ -811,7 +1101,9 @@ function goHome() {
 
     resetSlider();
 
-    showScreen(home);
+    showScreen(
+        home
+    );
 
 }
 
@@ -821,16 +1113,16 @@ function goHome() {
 ================================================== */
 
 const slider =
-    document.getElementById("slider");
+document.getElementById("slider");
 
 const sliderArrow =
-    document.getElementById("sliderArrow");
+document.getElementById("sliderArrow");
 
 const sliderProgress =
-    document.getElementById("sliderProgress");
+document.getElementById("sliderProgress");
 
 const sliderText =
-    document.getElementById("sliderText");
+document.getElementById("sliderText");
 
 
 let sliding = false;
@@ -852,124 +1144,113 @@ function sliderMax() {
 
 
 sliderArrow.addEventListener(
-    "pointerdown",
-    e => {
+"pointerdown",
+e => {
 
-        e.preventDefault();
+    e.preventDefault();
 
-        sliding = true;
+    sliding = true;
 
-        startX =
-            e.clientX -
-            currentX;
+    startX =
+        e.clientX -
+        currentX;
 
-        sliderArrow.setPointerCapture(
-            e.pointerId
+    sliderArrow.setPointerCapture(
+        e.pointerId
+    );
+
+});
+
+
+sliderArrow.addEventListener(
+"pointermove",
+e => {
+
+    if (!sliding)
+        return;
+
+    e.preventDefault();
+
+    const max =
+        sliderMax();
+
+    let x =
+        e.clientX -
+        startX;
+
+    x =
+        Math.max(
+            0,
+            Math.min(
+                x,
+                max
+            )
+        );
+
+    currentX = x;
+
+    sliderArrow.style.transform =
+        `translateX(${x}px)`;
+
+    sliderProgress.style.width =
+        `${x + 65}px`;
+
+    const percentage =
+        x / max;
+
+    sliderText.style.opacity =
+        1 - percentage;
+
+    if (
+        percentage > .88
+    ) {
+
+        sliding = false;
+
+        currentX = max;
+
+        sliderArrow.style.transform =
+            `translateX(${max}px)`;
+
+        setTimeout(
+            () => {
+
+                openForm();
+
+                resetSlider();
+
+            },
+            120
         );
 
     }
-);
+
+});
 
 
 sliderArrow.addEventListener(
-    "pointermove",
-    e => {
+"pointerup",
+() => {
 
-        if (!sliding)
-            return;
+    if (!sliding)
+        return;
 
-        e.preventDefault();
+    sliding = false;
 
-        const max =
-            sliderMax();
+    resetSlider();
 
-
-        let x =
-            e.clientX -
-            startX;
-
-
-        x =
-            Math.max(
-                0,
-                Math.min(
-                    x,
-                    max
-                )
-            );
-
-
-        currentX = x;
-
-
-        sliderArrow.style.transform =
-            `translateX(${x}px)`;
-
-
-        sliderProgress.style.width =
-            `${x + 65}px`;
-
-
-        const percentage =
-            x / max;
-
-
-        sliderText.style.opacity =
-            1 - percentage;
-
-
-        if (percentage > .88) {
-
-            sliding = false;
-
-            currentX = max;
-
-            sliderArrow.style.transform =
-                `translateX(${max}px)`;
-
-
-            setTimeout(
-                () => {
-
-                    openForm();
-
-                    resetSlider();
-
-                },
-                130
-            );
-
-        }
-
-    }
-);
+});
 
 
 sliderArrow.addEventListener(
-    "pointerup",
-    () => {
+"pointercancel",
+() => {
 
-        if (!sliding)
-            return;
+    sliding = false;
 
-        sliding = false;
+    resetSlider();
 
-        resetSlider();
-
-    }
-);
-
-
-sliderArrow.addEventListener(
-    "pointercancel",
-    () => {
-
-        sliding = false;
-
-        resetSlider();
-
-    }
-);
+});
 
 
 function resetSlider() {
@@ -990,7 +1271,6 @@ function resetSlider() {
 
     sliderText.style.opacity =
         "1";
-
 
     setTimeout(
         () => {
@@ -1013,13 +1293,19 @@ function resetSlider() {
 ================================================== */
 
 const canvas =
-    document.getElementById("signature");
+document.getElementById(
+    "signature"
+);
 
 const ctx =
-    canvas.getContext("2d");
+canvas.getContext(
+    "2d"
+);
 
 const signatureHint =
-    document.getElementById("signatureHint");
+document.getElementById(
+    "signatureHint"
+);
 
 
 let drawing = false;
@@ -1030,18 +1316,20 @@ let signed = false;
 function prepareCanvas() {
 
     const rect =
-        canvas.getBoundingClientRect();
+        canvas
+        .getBoundingClientRect();
 
     const ratio =
-        window.devicePixelRatio || 1;
-
+        window.devicePixelRatio
+        || 1;
 
     canvas.width =
-        rect.width * ratio;
+        rect.width *
+        ratio;
 
     canvas.height =
-        rect.height * ratio;
-
+        rect.height *
+        ratio;
 
     ctx.setTransform(
         ratio,
@@ -1051,7 +1339,6 @@ function prepareCanvas() {
         0,
         0
     );
-
 
     ctx.strokeStyle =
         "#ffffff";
@@ -1071,17 +1358,18 @@ function prepareCanvas() {
 function getPosition(e) {
 
     const rect =
-        canvas.getBoundingClientRect();
+        canvas
+        .getBoundingClientRect();
 
     return {
 
         x:
-            e.clientX -
-            rect.left,
+        e.clientX -
+        rect.left,
 
         y:
-            e.clientY -
-            rect.top
+        e.clientY -
+        rect.top
 
     };
 
@@ -1089,88 +1377,79 @@ function getPosition(e) {
 
 
 canvas.addEventListener(
-    "pointerdown",
-    e => {
+"pointerdown",
+e => {
 
-        e.preventDefault();
+    e.preventDefault();
 
-        drawing = true;
+    drawing = true;
 
-        signed = true;
+    signed = true;
 
-        signatureHint.style.display =
-            "none";
+    signatureHint.style.display =
+        "none";
 
+    const p =
+        getPosition(e);
 
-        const p =
-            getPosition(e);
+    ctx.beginPath();
 
+    ctx.moveTo(
+        p.x,
+        p.y
+    );
 
-        ctx.beginPath();
+    if (
+        canvas.setPointerCapture
+    ) {
 
-        ctx.moveTo(
-            p.x,
-            p.y
+        canvas.setPointerCapture(
+            e.pointerId
         );
 
-
-        if (
-            canvas.setPointerCapture
-        ) {
-
-            canvas.setPointerCapture(
-                e.pointerId
-            );
-
-        }
-
     }
-);
+
+});
 
 
 canvas.addEventListener(
-    "pointermove",
-    e => {
+"pointermove",
+e => {
 
-        if (!drawing)
-            return;
+    if (!drawing)
+        return;
 
-        e.preventDefault();
+    e.preventDefault();
 
+    const p =
+        getPosition(e);
 
-        const p =
-            getPosition(e);
+    ctx.lineTo(
+        p.x,
+        p.y
+    );
 
+    ctx.stroke();
 
-        ctx.lineTo(
-            p.x,
-            p.y
-        );
-
-        ctx.stroke();
-
-    }
-);
+});
 
 
 canvas.addEventListener(
-    "pointerup",
-    () => {
+"pointerup",
+() => {
 
-        drawing = false;
+    drawing = false;
 
-    }
-);
+});
 
 
 canvas.addEventListener(
-    "pointercancel",
-    () => {
+"pointercancel",
+() => {
 
-        drawing = false;
+    drawing = false;
 
-    }
-);
+});
 
 
 function clearSignature() {
@@ -1202,7 +1481,6 @@ function saveSignature() {
         .value
         .trim();
 
-
     const cognome =
         document
         .getElementById("cognome")
@@ -1212,7 +1490,9 @@ function saveSignature() {
 
     if (!nome) {
 
-        alert("Inserisci il nome.");
+        alert(
+            "Inserisci il nome."
+        );
 
         return;
 
@@ -1221,7 +1501,9 @@ function saveSignature() {
 
     if (!cognome) {
 
-        alert("Inserisci il cognome.");
+        alert(
+            "Inserisci il cognome."
+        );
 
         return;
 
@@ -1230,7 +1512,9 @@ function saveSignature() {
 
     if (!signed) {
 
-        alert("Inserisci la firma.");
+        alert(
+            "Inserisci la firma."
+        );
 
         return;
 
@@ -1239,9 +1523,11 @@ function saveSignature() {
 
     const record = {
 
-        nome,
+        nome:
+            nome,
 
-        cognome,
+        cognome:
+            cognome,
 
         firma:
             canvas.toDataURL(
@@ -1256,14 +1542,12 @@ function saveSignature() {
 
 
     const archivio =
-        JSON.parse(
-            localStorage.getItem(
-                "lauroSignatures"
-            ) || "[]"
-        );
+        getArchive();
 
 
-    archivio.push(record);
+    archivio.push(
+        record
+    );
 
 
     localStorage.setItem(
@@ -1274,7 +1558,9 @@ function saveSignature() {
     );
 
 
-    showScreen(success);
+    showScreen(
+        success
+    );
 
 
     setTimeout(
@@ -1284,7 +1570,9 @@ function saveSignature() {
 
             resetSlider();
 
-            showScreen(home);
+            showScreen(
+                home
+            );
 
         },
         2200
@@ -1300,36 +1588,577 @@ function saveSignature() {
 function resetForm() {
 
     document
-        .getElementById("nome")
-        .value = "";
-
+    .getElementById("nome")
+    .value = "";
 
     document
-        .getElementById("cognome")
-        .value = "";
-
+    .getElementById("cognome")
+    .value = "";
 
     clearSignature();
 
 }
 
 
-window.addEventListener(
-    "resize",
-    () => {
+/* ==================================================
+   ADMIN SEGRETO
+================================================== */
 
-        if (
-            formScreen
-            .classList
-            .contains("active")
-        ) {
+const adminTrigger =
+document.getElementById(
+    "adminTrigger"
+);
 
-            prepareCanvas();
+const signatureList =
+document.getElementById(
+    "signatureList"
+);
 
-        }
+const signatureCount =
+document.getElementById(
+    "signatureCount"
+);
+
+
+let adminTaps = 0;
+
+let adminTimer = null;
+
+
+adminTrigger.addEventListener(
+"click",
+() => {
+
+    adminTaps++;
+
+    clearTimeout(
+        adminTimer
+    );
+
+
+    if (
+        adminTaps >= 5
+    ) {
+
+        adminTaps = 0;
+
+        openAdmin();
+
+        return;
 
     }
-);
+
+
+    adminTimer =
+        setTimeout(
+            () => {
+
+                adminTaps = 0;
+
+            },
+            1500
+        );
+
+});
+
+
+function getArchive() {
+
+    try {
+
+        return JSON.parse(
+            localStorage.getItem(
+                "lauroSignatures"
+            )
+            || "[]"
+        );
+
+    }
+
+    catch {
+
+        return [];
+
+    }
+
+}
+
+
+function openAdmin() {
+
+    renderArchive();
+
+    showScreen(
+        adminScreen
+    );
+
+}
+
+
+function closeAdmin() {
+
+    showScreen(
+        home
+    );
+
+}
+
+
+/* ==================================================
+   VISUALIZZA ARCHIVIO
+================================================== */
+
+function renderArchive() {
+
+    const archivio =
+        getArchive();
+
+
+    signatureCount.textContent =
+        archivio.length;
+
+
+    signatureList.innerHTML =
+        "";
+
+
+    if (
+        archivio.length === 0
+    ) {
+
+        signatureList.innerHTML =
+        `
+        <div class="emptyArchive">
+            NESSUNA FIRMA RACCOLTA
+        </div>
+        `;
+
+        return;
+
+    }
+
+
+    archivio
+    .slice()
+    .reverse()
+    .forEach(
+        (item, reverseIndex) => {
+
+            const realIndex =
+                archivio.length -
+                1 -
+                reverseIndex;
+
+
+            const date =
+                new Date(
+                    item.data
+                );
+
+
+            const formattedDate =
+                date.toLocaleString(
+                    "it-IT",
+                    {
+                        day:
+                            "2-digit",
+
+                        month:
+                            "2-digit",
+
+                        year:
+                            "numeric",
+
+                        hour:
+                            "2-digit",
+
+                        minute:
+                            "2-digit"
+                    }
+                );
+
+
+            const row =
+                document
+                .createElement(
+                    "div"
+                );
+
+
+            row.className =
+                "signatureItem";
+
+
+            row.innerHTML =
+            `
+            <div>
+
+                <div class="guestName">
+                    ${escapeHTML(item.nome)}
+                    ${escapeHTML(item.cognome)}
+                </div>
+
+                <div class="guestDate">
+                    ${formattedDate}
+                </div>
+
+            </div>
+
+
+            <img
+                class="signaturePreview"
+                src="${item.firma}"
+                alt="Firma">
+
+
+            <div class="adminActions">
+
+                <button
+                    class="adminAction"
+                    onclick="downloadSignature(${realIndex})">
+
+                    PNG
+
+                </button>
+
+                <button
+                    class="adminAction"
+                    onclick="deleteSignature(${realIndex})">
+
+                    ELIMINA
+
+                </button>
+
+            </div>
+            `;
+
+
+            signatureList
+            .appendChild(
+                row
+            );
+
+        }
+    );
+
+}
+
+
+function escapeHTML(value) {
+
+    const div =
+        document
+        .createElement(
+            "div"
+        );
+
+    div.textContent =
+        value || "";
+
+    return div.innerHTML;
+
+}
+
+
+/* ==================================================
+   DOWNLOAD PNG
+================================================== */
+
+function downloadSignature(index) {
+
+    const archivio =
+        getArchive();
+
+    const item =
+        archivio[index];
+
+
+    if (!item)
+        return;
+
+
+    const link =
+        document
+        .createElement(
+            "a"
+        );
+
+
+    link.href =
+        item.firma;
+
+
+    const fileName =
+        (
+            item.nome +
+            "_" +
+            item.cognome
+        )
+        .replace(
+            /[^a-z0-9_-]/gi,
+            "_"
+        );
+
+
+    link.download =
+        fileName +
+        ".png";
+
+
+    document.body
+    .appendChild(
+        link
+    );
+
+
+    link.click();
+
+    link.remove();
+
+}
+
+
+/* ==================================================
+   ELIMINA SINGOLA
+================================================== */
+
+function deleteSignature(index) {
+
+    const archivio =
+        getArchive();
+
+    const item =
+        archivio[index];
+
+
+    if (!item)
+        return;
+
+
+    const conferma =
+        confirm(
+            "Eliminare la firma di " +
+            item.nome +
+            " " +
+            item.cognome +
+            "?"
+        );
+
+
+    if (!conferma)
+        return;
+
+
+    archivio.splice(
+        index,
+        1
+    );
+
+
+    localStorage.setItem(
+        "lauroSignatures",
+        JSON.stringify(
+            archivio
+        )
+    );
+
+
+    renderArchive();
+
+}
+
+
+/* ==================================================
+   ELIMINA TUTTO
+================================================== */
+
+function deleteAllSignatures() {
+
+    const archivio =
+        getArchive();
+
+
+    if (
+        archivio.length === 0
+    )
+        return;
+
+
+    const conferma =
+        confirm(
+            "Eliminare definitivamente TUTTE le firme?"
+        );
+
+
+    if (!conferma)
+        return;
+
+
+    localStorage.removeItem(
+        "lauroSignatures"
+    );
+
+
+    renderArchive();
+
+}
+
+
+/* ==================================================
+   ESPORTA CSV
+================================================== */
+
+function exportCSV() {
+
+    const archivio =
+        getArchive();
+
+
+    if (
+        archivio.length === 0
+    ) {
+
+        alert(
+            "Non ci sono firme da esportare."
+        );
+
+        return;
+
+    }
+
+
+    let csv =
+        "\uFEFFNome;Cognome;Data;Ora\n";
+
+
+    archivio.forEach(
+        item => {
+
+            const date =
+                new Date(
+                    item.data
+                );
+
+
+            const giorno =
+                date.toLocaleDateString(
+                    "it-IT"
+                );
+
+
+            const ora =
+                date.toLocaleTimeString(
+                    "it-IT",
+                    {
+                        hour:
+                            "2-digit",
+
+                        minute:
+                            "2-digit",
+
+                        second:
+                            "2-digit"
+                    }
+                );
+
+
+            const nome =
+                String(
+                    item.nome || ""
+                )
+                .replace(
+                    /;/g,
+                    ","
+                );
+
+
+            const cognome =
+                String(
+                    item.cognome || ""
+                )
+                .replace(
+                    /;/g,
+                    ","
+                );
+
+
+            csv +=
+                `${nome};${cognome};${giorno};${ora}\n`;
+
+        }
+    );
+
+
+    const blob =
+        new Blob(
+            [csv],
+            {
+                type:
+                    "text/csv;charset=utf-8;"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document
+        .createElement(
+            "a"
+        );
+
+
+    link.href =
+        url;
+
+
+    link.download =
+        "firme-achille-lauro.csv";
+
+
+    document.body
+    .appendChild(
+        link
+    );
+
+
+    link.click();
+
+    link.remove();
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+}
+
+
+/* ==================================================
+   RESIZE
+================================================== */
+
+window.addEventListener(
+"resize",
+() => {
+
+    if (
+        formScreen
+        .classList
+        .contains(
+            "active"
+        )
+    ) {
+
+        prepareCanvas();
+
+    }
+
+});
 
 </script>
 
