@@ -10,7 +10,7 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalabl
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#000000">
 
-<title>Achille Lauro — Firma</title>
+<title>Achille Lauro — Fan Gathering</title>
 
 <style>
 
@@ -24,16 +24,19 @@ html, body {
     width: 100%;
     height: 100%;
     background: #000;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
     overflow: hidden;
 }
 
-button {
-    font-family: inherit;
+body {
+    position: fixed;
+    inset: 0;
 }
 
-/* SCHERMATE */
+button, input {
+    font: inherit;
+}
 
 .screen {
     position: fixed;
@@ -46,69 +49,98 @@ button {
 }
 
 
-/* =========================
+/* ==================================================
    HOME
-========================= */
+================================================== */
 
 #home {
-
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
 
-    background-image:
-
+    background:
         linear-gradient(
-            90deg,
-            rgba(0,0,0,0.05) 0%,
-            rgba(0,0,0,0.05) 35%,
-            rgba(0,0,0,0.35) 55%,
-            rgba(0,0,0,0.88) 80%,
-            #000 100%
+            rgba(0,0,0,.08),
+            rgba(0,0,0,.18)
         ),
-
         url("./lauro.jpg");
 
     background-size: cover;
-    background-position: center;
+    background-position: center center;
     background-repeat: no-repeat;
 }
 
-.homeContent {
+#home::after {
+    content: "";
+    position: absolute;
+    inset: 0;
 
-    width: 45%;
-    padding-right: 7vw;
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(0,0,0,0) 15%,
+            rgba(0,0,0,.10) 45%,
+            rgba(0,0,0,.72) 100%
+        );
+
+    pointer-events: none;
+}
+
+.homeContent {
+    position: relative;
+    z-index: 2;
+
+    width: min(720px, 62vw);
+    height: 100%;
+
+    padding:
+        max(35px, env(safe-area-inset-top))
+        30px
+        max(40px, env(safe-area-inset-bottom));
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
 
-    z-index: 2;
+    text-align: center;
 }
 
-.event {
+.topEvent {
+    margin-top: 1vh;
 
-    font-size: 13px;
-    font-weight: bold;
-    letter-spacing: 5px;
+    font-size: 12px;
+    font-weight: 600;
 
-    margin-bottom: 20px;
+    letter-spacing: 7px;
+
+    text-transform: uppercase;
 
     opacity: .75;
 }
 
+.heroText {
+    margin-top: auto;
+    margin-bottom: 3vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .logo {
+    margin: 0;
 
-    font-family: Georgia, serif;
+    font-family: Georgia, "Times New Roman", serif;
 
-    font-size: clamp(60px, 7vw, 105px);
+    font-size: clamp(54px, 6.5vw, 92px);
 
-    font-weight: 900;
+    line-height: .80;
 
-    line-height: .78;
+    font-weight: 400;
 
-    letter-spacing: -6px;
+    letter-spacing: -4px;
 
-    margin-bottom: 35px;
+    text-shadow: 0 3px 30px rgba(0,0,0,.9);
 }
 
 .logo span {
@@ -116,241 +148,295 @@ button {
 }
 
 .location {
+    margin-top: 25px;
 
-    font-size: 19px;
+    font-size: 11px;
 
-    letter-spacing: 1px;
+    font-weight: 600;
 
-    opacity: .65;
+    letter-spacing: 6px;
 
-    margin-bottom: 55px;
-}
-
-.firmaButton {
-
-    height: 80px;
-
-    background: white;
-    color: black;
-
-    border: none;
-    border-radius: 4px;
-
-    font-size: 20px;
-    font-weight: 900;
-
-    letter-spacing: 3px;
-
-    cursor: pointer;
+    opacity: .8;
 }
 
 
-/* =========================
+/* ==================================================
+   SLIDER
+================================================== */
+
+.sliderArea {
+    width: min(480px, 70vw);
+
+    margin-bottom: 2vh;
+}
+
+.slider {
+    position: relative;
+
+    width: 100%;
+    height: 74px;
+
+    border: 1px solid rgba(255,255,255,.45);
+
+    border-radius: 100px;
+
+    background: rgba(0,0,0,.52);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    overflow: hidden;
+
+    user-select: none;
+    touch-action: none;
+}
+
+.sliderText {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding-left: 45px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 5px;
+
+    color: rgba(255,255,255,.85);
+
+    pointer-events: none;
+
+    transition: opacity .2s;
+}
+
+.sliderArrow {
+    position: absolute;
+
+    left: 7px;
+    top: 7px;
+
+    width: 58px;
+    height: 58px;
+
+    border-radius: 50%;
+
+    background: #fff;
+    color: #000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+    font-weight: 300;
+
+    cursor: grab;
+
+    z-index: 3;
+
+    box-shadow: 0 3px 20px rgba(0,0,0,.35);
+
+    transform: translateX(0);
+
+    will-change: transform;
+}
+
+.sliderArrow:active {
+    cursor: grabbing;
+}
+
+.sliderProgress {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 0;
+
+    background: rgba(255,255,255,.10);
+
+    pointer-events: none;
+}
+
+
+/* ==================================================
    FORM
-========================= */
+================================================== */
 
-#form {
-
+#formScreen {
     background: #050505;
 
     flex-direction: column;
 
     padding:
-        max(25px, env(safe-area-inset-top))
-        max(55px, env(safe-area-inset-right))
-        max(25px, env(safe-area-inset-bottom))
-        max(55px, env(safe-area-inset-left));
+        max(22px, env(safe-area-inset-top))
+        max(50px, env(safe-area-inset-right))
+        max(22px, env(safe-area-inset-bottom))
+        max(50px, env(safe-area-inset-left));
 }
-
 
 .topbar {
-
-    height: 60px;
+    height: 55px;
 
     display: flex;
-
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 
-    border-bottom: 1px solid #222;
+    border-bottom: 1px solid #1c1c1c;
 }
-
 
 .back {
-
+    border: 0;
     background: transparent;
 
-    border: none;
+    color: #666;
 
-    color: #777;
-
-    font-size: 12px;
-
-    font-weight: bold;
+    font-size: 11px;
+    font-weight: 700;
 
     letter-spacing: 2px;
-}
 
+    padding: 15px 0;
+}
 
 .smallLogo {
-
     font-family: Georgia, serif;
 
-    font-weight: 900;
-
     font-size: 20px;
+
+    letter-spacing: -1px;
 }
 
-
 .formContent {
+    flex: 1;
 
-    width: min(100%, 1000px);
+    width: min(920px, 88vw);
 
     margin: auto;
 
     display: flex;
-
     flex-direction: column;
-
     justify-content: center;
 }
 
-
-h1 {
-
+.formTitle {
     margin: 0 0 5px;
 
-    font-size: clamp(42px, 5vw, 68px);
+    text-align: center;
 
-    letter-spacing: -3px;
+    font-family: Georgia, serif;
+
+    font-size: clamp(38px, 4vw, 58px);
+
+    font-weight: 400;
+
+    letter-spacing: -2px;
 }
-
 
 .description {
+    text-align: center;
 
-    color: #777;
+    color: #666;
 
-    font-size: 16px;
+    font-size: 14px;
 
-    margin-bottom: 30px;
+    margin-bottom: 28px;
 }
 
-
 .names {
-
     display: grid;
 
     grid-template-columns: 1fr 1fr;
 
-    gap: 20px;
+    gap: 18px;
 
-    margin-bottom: 25px;
+    margin-bottom: 22px;
 }
 
+.field label,
+.signatureHeader {
+    color: #666;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 3px;
+}
 
 .field label {
-
     display: block;
-
-    color: #777;
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    letter-spacing: 2px;
 
     margin-bottom: 8px;
 }
 
-
 .field input {
-
     width: 100%;
+    height: 55px;
 
-    height: 58px;
+    background: #0d0d0d;
 
-    background: #111;
+    border: 1px solid #292929;
+    border-radius: 5px;
 
-    border: 1px solid #333;
+    outline: none;
 
-    border-radius: 4px;
-
-    color: white;
+    color: #fff;
 
     padding: 0 18px;
 
-    font-size: 20px;
-
-    outline: none;
+    font-size: 18px;
 }
-
 
 .field input:focus {
-    border-color: #888;
+    border-color: #777;
 }
 
-
-/* FIRMA */
-
 .signatureHeader {
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
-    color: #777;
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    letter-spacing: 2px;
 
     margin-bottom: 8px;
 }
 
-
 .clear {
+    border: 0;
 
     background: transparent;
 
-    border: none;
-
     color: #777;
 
-    font-size: 11px;
-
-    font-weight: bold;
+    font-size: 10px;
+    font-weight: 700;
 
     letter-spacing: 2px;
+
+    padding: 8px 0;
 }
 
-
 .signatureBox {
-
-    height: 220px;
-
     position: relative;
+
+    width: 100%;
+    height: min(220px, 27vh);
 
     background: #000;
 
-    border: 1px solid #333;
-
-    border-radius: 4px;
+    border: 1px solid #292929;
+    border-radius: 5px;
 
     overflow: hidden;
 
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
-
 canvas {
-
     position: absolute;
-
     inset: 0;
 
     width: 100%;
@@ -359,9 +445,7 @@ canvas {
     touch-action: none;
 }
 
-
-.hint {
-
+.signatureHint {
     position: absolute;
 
     left: 50%;
@@ -369,109 +453,98 @@ canvas {
 
     transform: translate(-50%, -50%);
 
-    color: #222;
+    color: #242424;
 
-    font-size: 17px;
+    font-size: 13px;
+    font-weight: 700;
 
-    letter-spacing: 4px;
+    letter-spacing: 5px;
 
     pointer-events: none;
 }
 
-
 .save {
+    height: 60px;
 
-    height: 65px;
+    border: 0;
+    border-radius: 100px;
 
-    background: white;
+    background: #fff;
+    color: #000;
 
-    color: black;
+    font-size: 12px;
+    font-weight: 800;
 
-    border: none;
-
-    border-radius: 4px;
-
-    font-size: 17px;
-
-    font-weight: 900;
-
-    letter-spacing: 3px;
+    letter-spacing: 4px;
 }
 
 
-/* =========================
-   CONFERMA
-========================= */
+/* ==================================================
+   SUCCESS
+================================================== */
 
 #success {
-
     background: #000;
 
     flex-direction: column;
 
     align-items: center;
-
     justify-content: center;
 
     text-align: center;
 }
 
-
 .check {
+    width: 72px;
+    height: 72px;
 
-    width: 80px;
-    height: 80px;
-
-    border: 2px solid white;
+    border: 1px solid #fff;
 
     border-radius: 50%;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
-    font-size: 35px;
+    margin-bottom: 25px;
 
-    margin-bottom: 30px;
+    font-size: 28px;
 }
-
 
 #success h2 {
-
     margin: 0;
 
-    font-size: 48px;
-}
+    font-family: Georgia, serif;
 
+    font-size: 45px;
+
+    font-weight: 400;
+}
 
 #success p {
+    color: #666;
 
-    color: #777;
+    font-size: 14px;
 
-    font-size: 17px;
+    letter-spacing: 3px;
 }
 
 
-/* =========================
-   BLOCCO VERTICALE
-========================= */
+/* ==================================================
+   PORTRAIT
+================================================== */
 
 #rotate {
-
     display: none;
 
     position: fixed;
-
     inset: 0;
 
-    background: black;
+    z-index: 99999;
 
-    z-index: 999999;
+    background: #000;
 
     align-items: center;
-
     justify-content: center;
 
     flex-direction: column;
@@ -479,22 +552,19 @@ canvas {
     text-align: center;
 }
 
-
 .rotateIcon {
+    font-size: 50px;
 
-    font-size: 60px;
-
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
+#rotate span {
+    font-size: 13px;
 
-#rotate strong {
+    font-weight: 700;
 
-    font-size: 22px;
-
-    letter-spacing: 4px;
+    letter-spacing: 5px;
 }
-
 
 @media (orientation: portrait) {
 
@@ -507,119 +577,120 @@ canvas {
 </style>
 </head>
 
-
 <body>
 
-
-<!-- RUOTA IPAD -->
 
 <div id="rotate">
 
     <div class="rotateIcon">↻</div>
 
-    <strong>RUOTA L'iPAD</strong>
+    <span>RUOTA L'iPAD</span>
 
 </div>
 
 
-
-<!-- ======================
-     HOME
-======================= -->
+<!-- HOME -->
 
 <section id="home" class="screen active">
 
     <div class="homeContent">
 
-        <div class="event">
+        <div class="topEvent">
             FAN GATHERING
         </div>
 
-        <div class="logo">
 
-            <span>ACHILLE</span>
+        <div class="heroText">
 
-            <span>LAURO</span>
+            <h1 class="logo">
+                <span>ACHILLE</span>
+                <span>LAURO</span>
+            </h1>
+
+            <div class="location">
+                ALLIANZ CLOUD · MILANO
+            </div>
 
         </div>
 
-        <div class="location">
-            ALLIANZ CLOUD · MILANO
+
+        <div class="sliderArea">
+
+            <div
+                id="slider"
+                class="slider">
+
+                <div
+                    id="sliderProgress"
+                    class="sliderProgress">
+                </div>
+
+                <div
+                    id="sliderText"
+                    class="sliderText">
+                    SCORRI PER FIRMARE
+                </div>
+
+                <div
+                    id="sliderArrow"
+                    class="sliderArrow">
+                    →
+                </div>
+
+            </div>
+
         </div>
-
-        <button
-        class="firmaButton"
-        onclick="openForm()">
-
-            FIRMA →
-
-        </button>
 
     </div>
 
 </section>
 
 
+<!-- FIRMA -->
 
-<!-- ======================
-     FORM
-======================= -->
-
-<section id="form" class="screen">
-
+<section
+    id="formScreen"
+    class="screen">
 
     <div class="topbar">
 
         <button
-        class="back"
-        onclick="goHome()">
-
+            class="back"
+            onclick="goHome()">
             ← INDIETRO
-
         </button>
 
-
         <div class="smallLogo">
-
             ACHILLE LAURO
-
         </div>
 
     </div>
 
 
-
     <div class="formContent">
 
-
-        <h1>
+        <h1 class="formTitle">
             Lascia la tua firma
         </h1>
 
-
         <div class="description">
-
-            Inserisci il tuo nome e firma nello spazio sottostante.
-
+            Un segno di questo giorno.
         </div>
 
 
-
         <div class="names">
-
 
             <div class="field">
 
                 <label>NOME</label>
 
                 <input
-                id="nome"
-                type="text"
-                placeholder="Nome"
-                autocomplete="off">
+                    id="nome"
+                    type="text"
+                    autocomplete="off"
+                    placeholder="Nome">
 
             </div>
-
 
 
             <div class="field">
@@ -627,149 +698,104 @@ canvas {
                 <label>COGNOME</label>
 
                 <input
-                id="cognome"
-                type="text"
-                placeholder="Cognome"
-                autocomplete="off">
+                    id="cognome"
+                    type="text"
+                    autocomplete="off"
+                    placeholder="Cognome">
 
             </div>
-
 
         </div>
 
 
-
         <div class="signatureHeader">
 
-            <span>FIRMA</span>
+            <span>LA TUA FIRMA</span>
 
             <button
-            class="clear"
-            onclick="clearSignature()">
-
+                class="clear"
+                onclick="clearSignature()">
                 CANCELLA
-
             </button>
 
         </div>
 
 
-
         <div class="signatureBox">
 
-
             <div
-            id="hint"
-            class="hint">
-
+                id="signatureHint"
+                class="signatureHint">
                 FIRMA QUI
-
             </div>
 
-
             <canvas id="signature"></canvas>
-
 
         </div>
 
 
-
         <button
-        class="save"
-        onclick="saveSignature()">
+            class="save"
+            onclick="saveSignature()">
 
-            SALVA FIRMA →
+            SALVA FIRMA
 
         </button>
 
-
     </div>
-
 
 </section>
 
 
+<!-- SUCCESS -->
 
-<!-- ======================
-     SUCCESS
-======================= -->
-
-<section id="success" class="screen">
-
+<section
+    id="success"
+    class="screen">
 
     <div class="check">
         ✓
     </div>
 
+    <h2>Grazie.</h2>
 
-    <h2>
-        Firma salvata
-    </h2>
-
-
-    <p>
-        Grazie
-    </p>
-
+    <p>LA TUA FIRMA È STATA SALVATA</p>
 
 </section>
 
 
-
 <script>
 
+/* ==================================================
+   SCHERMATE
+================================================== */
 
 const home =
-document.getElementById("home");
+    document.getElementById("home");
 
-
-const form =
-document.getElementById("form");
-
+const formScreen =
+    document.getElementById("formScreen");
 
 const success =
-document.getElementById("success");
+    document.getElementById("success");
 
 
-const canvas =
-document.getElementById("signature");
-
-
-const ctx =
-canvas.getContext("2d");
-
-
-const hint =
-document.getElementById("hint");
-
-
-let drawing = false;
-
-let signed = false;
-
-
-
-/* CAMBIO SCHERMATA */
-
-function show(screen) {
+function showScreen(screen) {
 
     document
-    .querySelectorAll(".screen")
-    .forEach(el =>
-        el.classList.remove("active")
-    );
+        .querySelectorAll(".screen")
+        .forEach(s =>
+            s.classList.remove("active")
+        );
 
     screen.classList.add("active");
 
 }
 
 
-
-/* HOME -> FIRMA */
-
 function openForm() {
 
-    show(form);
+    showScreen(formScreen);
 
     setTimeout(
         prepareCanvas,
@@ -779,37 +805,242 @@ function openForm() {
 }
 
 
-
-/* TORNA HOME */
-
 function goHome() {
 
-    reset();
+    resetForm();
 
-    show(home);
+    resetSlider();
+
+    showScreen(home);
 
 }
 
 
+/* ==================================================
+   SLIDER
+================================================== */
 
-/* PREPARA CANVAS */
+const slider =
+    document.getElementById("slider");
+
+const sliderArrow =
+    document.getElementById("sliderArrow");
+
+const sliderProgress =
+    document.getElementById("sliderProgress");
+
+const sliderText =
+    document.getElementById("sliderText");
+
+
+let sliding = false;
+
+let startX = 0;
+
+let currentX = 0;
+
+
+function sliderMax() {
+
+    return (
+        slider.clientWidth -
+        sliderArrow.offsetWidth -
+        14
+    );
+
+}
+
+
+sliderArrow.addEventListener(
+    "pointerdown",
+    e => {
+
+        e.preventDefault();
+
+        sliding = true;
+
+        startX =
+            e.clientX -
+            currentX;
+
+        sliderArrow.setPointerCapture(
+            e.pointerId
+        );
+
+    }
+);
+
+
+sliderArrow.addEventListener(
+    "pointermove",
+    e => {
+
+        if (!sliding)
+            return;
+
+        e.preventDefault();
+
+        const max =
+            sliderMax();
+
+
+        let x =
+            e.clientX -
+            startX;
+
+
+        x =
+            Math.max(
+                0,
+                Math.min(
+                    x,
+                    max
+                )
+            );
+
+
+        currentX = x;
+
+
+        sliderArrow.style.transform =
+            `translateX(${x}px)`;
+
+
+        sliderProgress.style.width =
+            `${x + 65}px`;
+
+
+        const percentage =
+            x / max;
+
+
+        sliderText.style.opacity =
+            1 - percentage;
+
+
+        if (percentage > .88) {
+
+            sliding = false;
+
+            currentX = max;
+
+            sliderArrow.style.transform =
+                `translateX(${max}px)`;
+
+
+            setTimeout(
+                () => {
+
+                    openForm();
+
+                    resetSlider();
+
+                },
+                130
+            );
+
+        }
+
+    }
+);
+
+
+sliderArrow.addEventListener(
+    "pointerup",
+    () => {
+
+        if (!sliding)
+            return;
+
+        sliding = false;
+
+        resetSlider();
+
+    }
+);
+
+
+sliderArrow.addEventListener(
+    "pointercancel",
+    () => {
+
+        sliding = false;
+
+        resetSlider();
+
+    }
+);
+
+
+function resetSlider() {
+
+    currentX = 0;
+
+    sliderArrow.style.transition =
+        "transform .28s ease";
+
+    sliderProgress.style.transition =
+        "width .28s ease";
+
+    sliderArrow.style.transform =
+        "translateX(0)";
+
+    sliderProgress.style.width =
+        "0";
+
+    sliderText.style.opacity =
+        "1";
+
+
+    setTimeout(
+        () => {
+
+            sliderArrow.style.transition =
+                "none";
+
+            sliderProgress.style.transition =
+                "none";
+
+        },
+        300
+    );
+
+}
+
+
+/* ==================================================
+   FIRMA
+================================================== */
+
+const canvas =
+    document.getElementById("signature");
+
+const ctx =
+    canvas.getContext("2d");
+
+const signatureHint =
+    document.getElementById("signatureHint");
+
+
+let drawing = false;
+
+let signed = false;
+
 
 function prepareCanvas() {
 
     const rect =
-    canvas.getBoundingClientRect();
-
+        canvas.getBoundingClientRect();
 
     const ratio =
-    window.devicePixelRatio || 1;
+        window.devicePixelRatio || 1;
 
 
     canvas.width =
-    rect.width * ratio;
-
+        rect.width * ratio;
 
     canvas.height =
-    rect.height * ratio;
+        rect.height * ratio;
 
 
     ctx.setTransform(
@@ -823,142 +1054,124 @@ function prepareCanvas() {
 
 
     ctx.strokeStyle =
-    "#ffffff";
+        "#ffffff";
 
-
-    ctx.lineWidth = 3;
-
+    ctx.lineWidth =
+        3;
 
     ctx.lineCap =
-    "round";
-
+        "round";
 
     ctx.lineJoin =
-    "round";
+        "round";
 
 }
 
 
-
-/* POSIZIONE PENNA */
-
 function getPosition(e) {
 
     const rect =
-    canvas.getBoundingClientRect();
-
+        canvas.getBoundingClientRect();
 
     return {
 
         x:
-        e.clientX -
-        rect.left,
+            e.clientX -
+            rect.left,
 
         y:
-        e.clientY -
-        rect.top
+            e.clientY -
+            rect.top
 
     };
 
 }
 
 
-
-/* INIZIO FIRMA */
-
 canvas.addEventListener(
-"pointerdown",
-function(e) {
+    "pointerdown",
+    e => {
 
-    e.preventDefault();
+        e.preventDefault();
 
+        drawing = true;
 
-    drawing = true;
+        signed = true;
 
-    signed = true;
-
-
-    hint.style.display =
-    "none";
+        signatureHint.style.display =
+            "none";
 
 
-    const p =
-    getPosition(e);
+        const p =
+            getPosition(e);
 
 
-    ctx.beginPath();
+        ctx.beginPath();
 
-    ctx.moveTo(
-        p.x,
-        p.y
-    );
-
-
-    if (
-        canvas.setPointerCapture
-    ) {
-
-        canvas.setPointerCapture(
-            e.pointerId
+        ctx.moveTo(
+            p.x,
+            p.y
         );
 
+
+        if (
+            canvas.setPointerCapture
+        ) {
+
+            canvas.setPointerCapture(
+                e.pointerId
+            );
+
+        }
+
     }
-
-});
-
-
-
-/* DISEGNO */
-
-canvas.addEventListener(
-"pointermove",
-function(e) {
-
-    if (!drawing)
-        return;
-
-
-    e.preventDefault();
-
-
-    const p =
-    getPosition(e);
-
-
-    ctx.lineTo(
-        p.x,
-        p.y
-    );
-
-
-    ctx.stroke();
-
-});
-
-
-
-/* FINE FIRMA */
-
-canvas.addEventListener(
-"pointerup",
-function() {
-
-    drawing = false;
-
-});
+);
 
 
 canvas.addEventListener(
-"pointercancel",
-function() {
+    "pointermove",
+    e => {
 
-    drawing = false;
+        if (!drawing)
+            return;
 
-});
+        e.preventDefault();
 
 
+        const p =
+            getPosition(e);
 
-/* CANCELLA */
+
+        ctx.lineTo(
+            p.x,
+            p.y
+        );
+
+        ctx.stroke();
+
+    }
+);
+
+
+canvas.addEventListener(
+    "pointerup",
+    () => {
+
+        drawing = false;
+
+    }
+);
+
+
+canvas.addEventListener(
+    "pointercancel",
+    () => {
+
+        drawing = false;
+
+    }
+);
+
 
 function clearSignature() {
 
@@ -969,42 +1182,37 @@ function clearSignature() {
         canvas.height
     );
 
-
     signed = false;
 
-
-    hint.style.display =
-    "block";
+    signatureHint.style.display =
+        "block";
 
 }
 
 
-
-/* SALVA */
+/* ==================================================
+   SALVATAGGIO
+================================================== */
 
 function saveSignature() {
 
-
     const nome =
-    document
-    .getElementById("nome")
-    .value
-    .trim();
+        document
+        .getElementById("nome")
+        .value
+        .trim();
 
 
     const cognome =
-    document
-    .getElementById("cognome")
-    .value
-    .trim();
-
+        document
+        .getElementById("cognome")
+        .value
+        .trim();
 
 
     if (!nome) {
 
-        alert(
-            "Inserisci il nome."
-        );
+        alert("Inserisci il nome.");
 
         return;
 
@@ -1013,9 +1221,7 @@ function saveSignature() {
 
     if (!cognome) {
 
-        alert(
-            "Inserisci il cognome."
-        );
+        alert("Inserisci il cognome.");
 
         return;
 
@@ -1024,100 +1230,83 @@ function saveSignature() {
 
     if (!signed) {
 
-        alert(
-            "Inserisci la firma."
-        );
+        alert("Inserisci la firma.");
 
         return;
 
     }
 
 
-
     const record = {
 
-        nome: nome,
+        nome,
 
-        cognome: cognome,
+        cognome,
 
         firma:
-        canvas.toDataURL(
-            "image/png"
-        ),
+            canvas.toDataURL(
+                "image/png"
+            ),
 
         data:
-        new Date()
-        .toISOString()
+            new Date()
+            .toISOString()
 
     };
 
 
-
     const archivio =
-
-    JSON.parse(
-
-        localStorage
-        .getItem(
-            "lauroSignatures"
-        )
-
-        || "[]"
-
-    );
+        JSON.parse(
+            localStorage.getItem(
+                "lauroSignatures"
+            ) || "[]"
+        );
 
 
-
-    archivio.push(
-        record
-    );
-
+    archivio.push(record);
 
 
     localStorage.setItem(
-
         "lauroSignatures",
-
         JSON.stringify(
             archivio
         )
-
     );
 
 
-
-    show(success);
-
+    showScreen(success);
 
 
     setTimeout(
-        function() {
+        () => {
 
-            reset();
+            resetForm();
 
-            show(home);
+            resetSlider();
+
+            showScreen(home);
 
         },
-
         2200
     );
 
 }
 
 
+/* ==================================================
+   RESET
+================================================== */
 
-/* RESET */
-
-function reset() {
-
-    document
-    .getElementById("nome")
-    .value = "";
-
+function resetForm() {
 
     document
-    .getElementById("cognome")
-    .value = "";
+        .getElementById("nome")
+        .value = "";
+
+
+    document
+        .getElementById("cognome")
+        .value = "";
 
 
     clearSignature();
@@ -1125,24 +1314,22 @@ function reset() {
 }
 
 
-
-/* ROTAZIONE / RESIZE */
-
 window.addEventListener(
-"resize",
-function() {
+    "resize",
+    () => {
 
-    if (
-        form.classList
-        .contains("active")
-    ) {
+        if (
+            formScreen
+            .classList
+            .contains("active")
+        ) {
 
-        prepareCanvas();
+            prepareCanvas();
+
+        }
 
     }
-
-});
-
+);
 
 </script>
 
